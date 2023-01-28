@@ -4,4 +4,7 @@ public interface UserMapper {
 
     int insertUser();
 
+    void updateUser();
+
+    void deleteUser();
 }
