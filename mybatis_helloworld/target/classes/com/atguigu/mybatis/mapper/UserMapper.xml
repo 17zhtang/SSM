@@ -22,4 +22,20 @@
     <delete id="deleteUser">
         delete from t_user where id = 3
     </delete>
+
+    <!--  User getUserById();  -->
+    <!-- resultType:结果类型，将查询到的数据转为java类型 -->
+    <!-- resultMap:自定义映射，处理多对一或一对多的映射关系 -->
+    <select id="getUserById" resultType="com.atguigu.mybatis.pojo.User">
+        select * from t_user where id = 2
+    </select>
+
+    <!-- List<User> getAllUser(); -->
+<!--    <select id="getAllUser" resultType="com.atguigu.mybatis.pojo.User">-->
+<!--        select * from t_user-->
+<!--    </select>-->
+    <!-- 使用别名 -->
+    <select id="getAllUser" resultType="User">
+        select * from t_user
+    </select>
 </mapper>
