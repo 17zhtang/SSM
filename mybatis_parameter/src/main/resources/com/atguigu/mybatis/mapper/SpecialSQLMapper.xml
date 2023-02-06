@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.SpecialSQLMapper">
+    <!--
+        1、不能用'%#{}%'，因为解析出来是'%?%'，?位于''中，占位符失效
+        2、${}字符串拼接解析出来就是mohu的值
+        3、concat('%',#{mohu},'%') 拼接字符串
+        4、"%"#{mohu}"%"
+    -->
+    <!--List<User> getUserByLike(@Param("mohu") String mohu);-->
+    <select id="getUserByLike" resultType="User">
+        <!--select * from t_user where username like '%${mohu}%'-->
+        <!--select * from t_user where username like concat('%',#{mohu},'%')-->
+        select * from t_user where username like "%"#{mohu}"%"
+    </select>
+
+    <!--#{}会为值两边加上''，#{9，10}解析出来是'9,10'-->
+    <!--void deleteMoreUser(@Param("ids") String ids);-->
+    <delete id="deleteMoreUser">
+        delete from t_user where id in(${ids})
+    </delete>
+
+
+    <!--表名不能加''，所以不能用#{}-->
+    <!--List<User> getUserList(@Param("tableName") String tableName);-->
+    <select id="getUserList" resultType="User">
+        select * from ${tableName}
+    </select>
+
+    <!--keyProperty="id"返回自增的主键放在user的id中-->
+    <!--void insertUser(User user);-->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
+    </insert>
+</mapper>
