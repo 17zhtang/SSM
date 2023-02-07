@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+
+    <!--类中属性名与表字段名不一致
+        1、可以在sql中将属性名设置为别名
+        2、当表字段符合Mysql使用要求，使用_，且类属性符合java要求使用驼峰
+            可以在mybatis的核心配置文件中设置，将下划线映射为驼峰
+            emp_id映射为empId
+        3、使用resultMap自定义映射
+    -->
+    <!--Emp getEmpByEmpId(@Param("empId") Integer empId);-->
+
+    <!--
+        id标识
+        type 映射的实体类
+    -->
+    <resultMap id="empResultMap" type="Emp">
+        <!--主键和属性映射
+            column是字段名
+            property是实体类的属性名
+        -->
+        <id column="emp_id" property="empId"></id>
+        <!--普通字段和属性映射-->
+        <result column="emp_name" property="empName"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+    </resultMap>
+
+    <select id="getEmpByEmpId" resultMap="empResultMap">
+        select * from t_emp where emp_id = #{empId}
+    </select>
+
+<!--    <select id="getEmpByEmpId" resultType="Emp">-->
+<!--        &lt;!&ndash;select emp_id empId,emp_name empName,age,gender from t_emp where emp_id = #{empId}&ndash;&gt;-->
+<!--        select * from t_emp where emp_id = #{empId}-->
+<!--    </select>-->
+</mapper>
