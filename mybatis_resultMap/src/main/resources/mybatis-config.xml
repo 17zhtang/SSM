@@ -12,9 +12,13 @@ ectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?
     <!-- 引入jdbc.properties配置文件,用${}引用value -->
     <properties resource="jdbc.properties"/>
 
-    <!--将下划线映射为驼峰-->
+
     <settings>
+        <!--将下划线映射为驼峰-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--延迟加载（懒加载）-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <!-- 别名标签
