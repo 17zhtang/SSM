@@ -22,6 +22,11 @@ ectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?
         <package name="com.atguigu.mybatis.pojo"/>
     </typeAliases>
 
+<!--    配置分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
     <!--设置连接数据库的环境
         default设置默认环境
     -->
