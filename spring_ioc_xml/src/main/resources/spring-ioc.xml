@@ -1,7 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean id="studentOne" class="com.atguigu.spring.pojo.Student"></bean>
+
+    <!--
+        property 通过成员变量的set方法赋值
+            name为属性名,value为所赋的值
+    -->
+    <bean id="studentTwo" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="123"></property>
+        <property name="age" value="52"></property>
+        <property name="gender" value="男"></property>
+        <property name="sname" value="abc"></property>
+    </bean>
+
+    <bean id="studentThree" class="com.atguigu.spring.pojo.Student">
+        <constructor-arg value="456"></constructor-arg>
+        <constructor-arg value="haha"></constructor-arg>
+        <constructor-arg value="女"></constructor-arg>
+        <constructor-arg value="45" name="age"></constructor-arg>
+    </bean>
+
+    <!--
+        为属性赋值为null时使用null标签
+
+        特殊字符：
+            <: &lt;
+            >: &gt;
+
+        CDATA节：
+            表示 a<b字符串
+             <value><![CDATA[
+                a<b
+            ]]></value>>
+    -->
+    <bean id="studentFour" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="123"></property>
+        <property name="age" value="52"></property>
+        <property name="gender">
+            <null></null>
+        </property>
+<!--        <property name="sname" value="&lt;four&gt;"></property>-->
+        <property name="sname" >
+            <value><![CDATA[a<b]]></value>
+        </property>
+    </bean>
+
+    <!--
+        ref属性引用IOC容器中的bean来为类类型属性赋值
+
+        为类类型属性赋值的方式：
+            1、直接引用
+            2、级联
+            3、内部bean
+    -->
+    <bean id="studentFive" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="888"></property>
+        <property name="age" value="25"></property>
+        <property name="gender" value="男"></property>
+        <property name="sname" value="Five"></property>
+        <!-- 级联方式 clazz.cid，先引用再修改 -->
+<!--        <property name="clazz" ref="clazzOne"></property>
+        <property name="clazz.cid" value="777"></property>
+        <property name="clazz.cname" value="gg"></property>-->
+
+        <!-- 内部bean赋值，内部bean不能被外部获取-->
+        <property name="clazz">
+            <bean id="clazzInner" class="com.atguigu.spring.pojo.Clazz">
+                <property name="cid" value="99"></property>
+                <property name="cname" value="rr"></property>
+            </bean>
+        </property>
+        <!-- array标签为数组赋值 -->
+        <property name="hobby">
+            <array>
+                <value>ball</value>
+                <value>game</value>
+                <value>phone</value>
+            </array>
+        </property>
+<!--        <property name="teacherMap">
+            <map>
+                <entry key="1" value-ref="teacherOne"></entry>
+                <entry key="2" value-ref="teacherTwo"></entry>
+            </map>
+        </property>-->
+        <property name="teacherMap" ref="teacherMap"></property>
+    </bean>
+
+    <!-- list标签为集合赋值
+        两种方式：
+        1、在list标签中配置属性值
+        2、引用集合类型的bean
+        -->
+    <bean id="clazzOne" class="com.atguigu.spring.pojo.Clazz">
+        <property name="cid" value="66"></property>
+        <property name="cname" value="kk"></property>
+<!--        <property name="students">
+            <list>
+                <ref bean="studentOne"></ref>
+                <ref bean="studentTwo"></ref>
+            </list>
+        </property>-->
+        <property name="students" ref="studentList"></property>
+    </bean>
+
+    <!--配置集合类型的bean，使用util约束-->
+    <util:list id="studentList">
+        <ref bean="studentOne"></ref>
+        <ref bean="studentTwo"></ref>
+    </util:list>
+
+    <bean id="teacherOne" class="com.atguigu.spring.pojo.Teacher">
+        <property name="tid" value="1"></property>
+        <property name="tname" value="111"></property>
+    </bean>
+    <bean id="teacherTwo" class="com.atguigu.spring.pojo.Teacher">
+        <property name="tid" value="2"></property>
+        <property name="tname" value="222"></property>
+    </bean>
+
+    <util:map id="teacherMap">
+        <entry key="1" value-ref="teacherOne"></entry>
+        <entry key="2" value-ref="teacherTwo"></entry>
+    </util:map>
+
+    <!--p命名空间-->
+    <bean id="studentSix" class="com.atguigu.spring.pojo.Student"
+    p:sid="1235" p:teacherMap-ref="teacherMap"></bean>
 </beans>

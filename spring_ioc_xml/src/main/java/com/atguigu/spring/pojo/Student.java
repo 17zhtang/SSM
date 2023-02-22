@@ -1,5 +1,8 @@
 package com.atguigu.spring.pojo;
 
+import java.util.Arrays;
+import java.util.Map;
+
 public class Student implements Person{
 
     private Integer sid;
@@ -10,14 +13,59 @@ public class Student implements Person{
 
     private String gender;
 
-    public Student(Integer sid, String sname, Integer age, String gender) {
+    private Double score;
+
+    private Clazz clazz;
+
+    private String[] hobby;
+
+    private Map<String, Teacher> teacherMap;
+
+    public Student(Integer sid, String sname, String gender,Integer age) {
         this.sid = sid;
         this.sname = sname;
         this.age = age;
         this.gender = gender;
     }
 
+    public Student(Integer sid, String sname, String gender,Double score) {
+        this.sid = sid;
+        this.sname = sname;
+        this.gender = gender;
+        this.score = score;
+    }
+
+    public Map<String, Teacher> getTeacherMap() {
+        return teacherMap;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "sid=" + sid +
+                ", sname='" + sname + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", score=" + score +
+                ", clazz=" + clazz +
+                ", hobby=" + Arrays.toString(hobby) +
+                ", teacherMap=" + teacherMap +
+                '}';
+    }
+
+    public void setTeacherMap(Map<String, Teacher> teacherMap) {
+        this.teacherMap = teacherMap;
+    }
+
     public Student() {
+    }
+
+    public String[] getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String[] hobby) {
+        this.hobby = hobby;
     }
 
     public Integer getSid() {
@@ -52,13 +100,20 @@ public class Student implements Person{
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "sid=" + sid +
-                ", sname='" + sname + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
+    public Double getScore() {
+        return score;
     }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public Clazz getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
+    }
+
 }
