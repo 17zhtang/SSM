@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--socpe设置范围：
+        singleton 单例 默认 表示获取的该bean的对象都是同一个
+        prototype 多例 表示获取该bean的对象都不是同一个
+    -->
+    <bean id="student" class="com.atguigu.spring.pojo.Student" scope="prototype">
+        <property name="sid" value="100"></property>
+        <property name="sname" value="pp"></property>
+    </bean>
+</beans>
