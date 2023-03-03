@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring_helloworld" />
         <module name="mybatis_parameter" />
+        <module name="spring-proxy" />
         <module name="mybatis_mbg" />
         <module name="mybatis_resultMap" />
         <module name="mybatis_cache" />
@@ -24,6 +25,7 @@
       <module name="mybatis_mbg" target="1.8" />
       <module name="mybatis_parameter" target="1.8" />
       <module name="mybatis_resultMap" target="1.8" />
+      <module name="spring-proxy" target="1.8" />
       <module name="spring_helloworld" target="1.8" />
       <module name="spring_ioc_annotation" target="1.8" />
       <module name="spring_ioc_xml" target="1.8" />
