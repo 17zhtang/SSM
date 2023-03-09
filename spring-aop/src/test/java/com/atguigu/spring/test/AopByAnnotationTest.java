@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class AopTest {
+public class AopByAnnotationTest {
 
     @Test
     public void testAOPByAnnotation(){

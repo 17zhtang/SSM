@@ -1,4 +1,4 @@
-package com.atguigu.spring.aop.annotation;
+package com.atguigu.spring.aop.xml;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -36,17 +36,11 @@ import java.util.Arrays;
  */
 
 @Component
-@Aspect  //将组件标识为切面
 public class LoggerAspect {
 
-    //公共的切入点表达式
-    @Pointcut("execution(* com.atguigu.spring.aop.annotation.CalculatorImpl.*(..))")
-    public void pointCut(){}
 
 
-//    @Before("execution(public int com.atguigu.spring.aop.annotation.CalculatorImpl.add(int,int))")
-    //CalculatorImpl类的所有方法都加入前置通知
-    @Before("execution(* com.atguigu.spring.aop.annotation.CalculatorImpl.*(..))")
+
     public void beforeAdviceMethod(JoinPoint joinPoint){
         //获取链接点对应方法的签名信息
         Signature signature = joinPoint.getSignature();
@@ -56,8 +50,7 @@ public class LoggerAspect {
         System.out.println("LoggerAspect，方法："+signature.getName()+"，参数："+ Arrays.toString(args));
     }
 
-    //后置通知
-    @After("pointCut()")
+
     public void afterAdviceMethod(JoinPoint joinPoint){
         Signature signature = joinPoint.getSignature();
         System.out.println("LoggerAspect 方法："+signature.getName()+"，执行完毕");
@@ -65,7 +58,6 @@ public class LoggerAspect {
 
     //在返回通知中若想获取目标对象的返回值，需要在AfterReturning中设置returning属性，设定属性名
     //就可以把通知方法的某个参数指定为目标对象的返回值的参数
-    @AfterReturning(value = "pointCut()",returning = "result")
     public void afterReturningAdviceMethod(JoinPoint joinPoint, Object result){
         Signature signature = joinPoint.getSignature();
 
@@ -74,14 +66,12 @@ public class LoggerAspect {
 
     //在异常通知中若想获取目标对象的异常，需要在AfterThrowing中设置throwing属性，设定属性名
     //就可以把通知方法的某个参数指定为目标对象的异常的参数
-    @AfterThrowing(value = "pointCut()",throwing = "ex")
     public void afterThrowingAdviceMethod(JoinPoint joinPoint,Throwable ex){
         Signature signature = joinPoint.getSignature();
         System.out.println("LoggerAspect 方法："+signature.getName()+"异常："+ex);
     }
 
 
-    @Around("pointCut()")
     //环绕通知的方法的返回值一定要和目标对象的方法的返回值一致
     public Object aroundAdviceMethod(ProceedingJoinPoint joinPoint){
         Object result = null;
