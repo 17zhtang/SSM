@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Transaction 注解标识在方法上或者类上
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:tx-annotation.xml")
-public class TxByAnnotationTest {
+@ContextConfiguration("classpath:tx-xml.xml")
+public class TxByXMLTest {
 
     @Autowired
     private BookController bookController;
@@ -25,7 +25,7 @@ public class TxByAnnotationTest {
     @Test
     public void testBuyBook(){
 //        bookController.buyBook(1,1);
-        bookController.checkout(1,new Integer[]{1,2});
+        bookController.buyBook(1,1);
     }
 
 
